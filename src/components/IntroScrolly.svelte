@@ -43,7 +43,7 @@
         <p>Loading</p>
         <div class="icon-loading"></div>
         {:else}
-        <p style="white-space: nowrap">Veja mais</p>
+        <p>Scroll</p>
         <div class="icon-scroll"></div>
         {/if}
     </div>

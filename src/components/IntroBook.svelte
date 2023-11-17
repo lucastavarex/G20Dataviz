@@ -85,17 +85,17 @@
 					<div class="book-cover">
 						<div class="img-wrapper">
 							<img 
-								srcset="assets/images/rj.jpg 600w, assets/images/rj.jpg 900w" 
+								srcset="assets/images/Alice_cover_notype_600.jpg 600w, assets/images/Alice_cover_notype_900.jpg 900w" 
 								sizes="(max-width: 600px) 600px, 900px"
-								src="assets/images/rj.jpg"
+								src="assets/images/Alice_cover_notype_900.jpg"
 								alt="An illustrated book cover of an Asian American woman with long brown hair and red lipstick. She has one hand on her hip and the other on her chin in a curious pose. There are colorful books flying around her on a blue background."
 							/>
 						</div>
 						<div class="gradient-wrapper"></div>
-						<div class="title-wrapper" style={"width: 100%; height: 50%;"}>
-							<h1>RIO <br> DE <br> JANEIRO <br> </h1>
+						<div class="title-wrapper" style={"width: 100%; height: 80%;"}>
+							<h1>What Does <br> A Happily <br> Ever After <br> Look Like?</h1>
 						</div>
-						<p class="byline"><a href="https://google.com">Por: Judite Cypreste</a></p>
+						<p class="byline"><a href="https://pudding.cool/author/alice-liang">Alice Liang</a></p>
 					</div>
 					<div class="book-cover-back">
 						<div class="book-cover-back-indent">
@@ -131,7 +131,7 @@
 				<div class="book-bottom"></div>
 			</div>
 		</div>
-	<p class="credit"> • Design feito por <a href="https://google.com">Caio Jacintho</a></p>
+	<p class="credit">With <a href="https://pudding.cool/author/jan-diehm/">Jan Diehm</a> • Cover design by <a href="http://www.sandrachiu.com/">Sandra Chiu</a></p>
 </section>
 
 <style>
