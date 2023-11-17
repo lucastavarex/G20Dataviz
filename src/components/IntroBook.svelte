@@ -93,7 +93,7 @@
 						</div>
 						<div class="gradient-wrapper"></div>
 						<div class="title-wrapper" style={"width: 100%; height: 80%;"}>
-							<h1>What Does <br> A Happily <br> Ever After <br> Look Like?</h1>
+							<h1>1What Does <br> A Happily <br> Ever After <br> Look Like?</h1>
 						</div>
 						<p class="byline"><a href="https://pudding.cool/author/alice-liang">Alice Liang</a></p>
 					</div>
