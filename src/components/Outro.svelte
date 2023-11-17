@@ -20,9 +20,9 @@
         <h5>Methods & Notes</h5>
         <Prose copy={copy.dataNote} />
     </div>
-    <div class="tip-wrapper">
+    <!-- <div class="tip-wrapper">
         <p>Like this story? Give the author a <span><Tip href={"https://donate.stripe.com/14k9DY8BJ5C07PG8wD"}/></span></p>
-    </div>
+    </div> -->
 </section>
 
 <style>

@@ -131,7 +131,7 @@
 				<div class="book-bottom"></div>
 			</div>
 		</div>
-	<p class="credit"> • Designer <a href="http://www.sandrachiu.com/">Caio Jacintho</a></p>
+	<p class="credit"> • Design <a href="http://www.sandrachiu.com/">Caio Jacintho</a></p>
 </section>
 
 <style>
@@ -308,7 +308,7 @@
 		width: 100%;
         height: 100%;
 		position:absolute; top:0; bottom:0;
-		background:#4C7DFE;
+		background:#007E7D;
 		transform-style:preserve-3d;
 		backface-visibility:hidden;
 		transform:rotate3d(0,1,0,-180deg);
@@ -379,7 +379,7 @@
     .book-back{
 		width:100%;
 		height: calc(100% - 1rem);
-		background:#4C7DFE;
+		background:#007E7D;
 		position:absolute; 
         top:0; 
         bottom:0;
@@ -392,8 +392,8 @@
 -------------------------------------------------------------- */
 	.book-bone{
 		width:50px;
-		background:#4C7DFE;
-		box-shadow:1px 0 0 #4C7DFE,-1px 0 0 #4C7DFE; /* 旋转的时候 拼接处隐隐约约会有个缝隙 所以加上个阴影来填补它 */
+		background:#007E7D;
+		box-shadow:1px 0 0 #007E7D,-1px 0 0 #007E7D; /* 旋转的时候 拼接处隐隐约约会有个缝隙 所以加上个阴影来填补它 */
 		position:absolute;
 		top:0; bottom:16px; left:-25px;
 		transform:rotate3d(0,1,0,-90deg);

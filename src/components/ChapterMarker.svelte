@@ -65,7 +65,7 @@
                 </div>
             {/each}
         </div>
-        <button 
+        <!-- <button 
             on:click={handleListToggle}
             class="listBtn"
             aria-label="open reading list">
@@ -81,7 +81,7 @@
                 {:else}
                     <div class="book_inList_black"></div>
                 {/if}
-        </button>
+        </button> -->
     </div>
     <div class="slider-wrapper">
         {#if $sliderVisible}
@@ -171,7 +171,7 @@
 		flex-direction: row;
     }
     .logo {
-        width: 1.25rem;
+        width: 1px !important;
         transform: scale(1);
         transition: 0.25s linear;
         position: absolute;
@@ -179,7 +179,7 @@
         top: 0.75rem;
     }
     .logo:hover {
-        transform: scale(1.25);
+        transform: scale(1.10);
     }
     .logo a {
         border-bottom: none;

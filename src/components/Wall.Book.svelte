@@ -34,7 +34,7 @@
         </div>
         <div class="marker">{book.year}</div>
         {#if bookAddable == true}
-            <AddButton />
+            <!-- <AddButton /> -->
         {/if}
     </div>
 {:else}
@@ -48,7 +48,7 @@
             <!-- <Image loading="lazy" src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
         </div>
         {#if bookAddable == true}
-            <AddButton />
+            <!-- <AddButton /> -->
         {/if}
     </div>
 {/if}

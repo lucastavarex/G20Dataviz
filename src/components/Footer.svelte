@@ -32,7 +32,7 @@
 
 <footer>
 	<section class="stories">
-		{#each stories as { hed, url, image }}
+		<!-- {#each stories as { hed, url, image }}
 			{@const href = url.startsWith("http")
 				? url
 				: `https://pudding.cool/${url}`}
@@ -45,20 +45,18 @@
 					<span>{hed}</span>
 				</a>
 			</div>
-		{/each}
+		{/each} -->
 	</section>
 
 	<section class="about">
 		<div class="wordmark">
 			<a href="https://pudding.cool" target="_self">
-				{@html wordmark}
+				Escritório de Dados
 			</a>
 		</div>
 		<p>
-			<a href="https://pudding.cool" target="_self">The Pudding</a>
-			is a digital publication that explains ideas debated in culture with visual
-			essays.
-		</p>
+			<a href="https://pudding.cool" target="_self">Escritório de dados</a>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias tempora..</p>
 	</section>
 
 	<section class="links">
@@ -119,6 +117,7 @@
 	.wordmark {
 		max-width: 10em;
 		margin: 1em auto;
+		font-size: 2em;
 	}
 	:global(.wordmark svg path) {
 		fill: white;
