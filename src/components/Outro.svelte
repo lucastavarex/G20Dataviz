@@ -1,35 +1,25 @@
 <script>
     import { getContext } from "svelte";
     import inView from "$actions/inView.js";
-    import { activeSection } from "$stores/misc.js";
-    import Tip from "$components/helpers/Tip.svelte";
-    import ReadingList from "$components/ReadingList.svelte";
-    import data from "$data/listings.csv";
-    import Prose from "$components/Prose.svelte";
+    import { activeBar } from "$stores/misc.js";
+
     const copy = getContext("copy");
 
-    function setSection(id) { activeSection.set(id); }
+    function setActiveBar(id) { activeBar.set(id); }
 </script>
 
-<section id="methods"
+<section 
     use:inView
-    on:enter={() => setSection("methods")}>
-    <Prose copy={copy.outro} />
-        <ReadingList data={data} pos={"inline"}/>
-    <div id="notes">
-        <h5>Methods & Notes</h5>
-        <Prose copy={copy.dataNote} />
-    </div>
-    <!-- <div class="tip-wrapper">
-        <p>Like this story? Give the author a <span><Tip href={"https://donate.stripe.com/14k9DY8BJ5C07PG8wD"}/></span></p>
-    </div> -->
+    on:enter={() => setActiveBar(false)}>
+    {console.log("01 ", $activeBar)}
+   
 </section>
 
 <style>
-    #methods {
+    /* #methods {
         background-image: linear-gradient(var(--romance-bg-teal) 0%, var(--romance-bg-pink) 50%);
         padding: 10rem 0 5rem 0;
-    }
+    } */
     :global(#notes a:hover, section#methods a:hover) {
         background-position: 0 0;
         background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);

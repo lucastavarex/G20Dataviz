@@ -20,18 +20,19 @@
     function setSectionEnter(id) { 
         headlingFly = true;
         activeSection.set(id); 
+        // console.log("AHUASHUAHUSAHUSAUHAS", id)
     }
     function setSectionExit(id) { 
         let nextSection;
         if (scrollDir == "down") {
-            if (id == "raunchiness") { nextSection = "illustration"; } 
+          
+            if (id == "raunchiness") { nextSection = "raunchiness"; } 
             else if (id == "illustration") { nextSection = "race"; }
             else if (id == "race") { nextSection = "methods"; }
             activeSection.set(nextSection)
         } else if (scrollDir == "up") {
-            if (id == "raunchiness") { nextSection = "intro"; } 
-            else if (id == "illustration") { nextSection = "raunchiness"; }
-            else if (id == "race") { nextSection = "illustration"; }
+            if (id == "raunchiness") { nextSection = "methods"; } 
+            else if (id == "methods") { nextSection = "raunchiness"; }
             activeSection.set(nextSection)
         }
     }
@@ -43,11 +44,6 @@
         }
     }
 
-    function resetTitles(id) {
-        const title = id == "race" ? "racial diversity" : id;
-        return title
-    }
-    
     $: scrollY, checkScrollY(scrollY);
 </script>
 
@@ -56,10 +52,9 @@
     on:enter={() => setSectionEnter(id)}
     on:exit={() => setSectionExit(id)}>
     {#if headlingFly}
-        <h2 in:fly={{ y: 200, duration: 2000 }}>{resetTitles(id)}</h2>
+        <!-- <h2 in:fly={{ y: 200, duration: 2000 }}>Rio Capital do Mundo</h2> -->
     {/if}
-    <ChapterText copy={copyBlock}/>
-    <Bookmark category={"wall"} />
+    <!-- <ChapterText copy={copyBlock}/> -->
     <WallScrolly data={data} copy={copyScroll} section={id} xShiftSection={xShiftSection} />
 </section>
 
@@ -68,7 +63,7 @@
         padding: 3rem 0;
     }
     #raunchiness {
-        background-image: linear-gradient(var(--romance-bg-pink) 0%, var(--romance-bg-blue) 10%);
+        background-image: linear-gradient(var(--romance-bg-pink) 0%, var(--romance-bg-blue) 50%, var(--romance-bg-pink) 100%);
     }
     #illustration {
         background-image: linear-gradient(var(--romance-bg-blue) 0%, var(--romance-bg-yellow) 10%);
@@ -110,7 +105,7 @@
         width: 100%;
         margin: 0 auto 4rem auto;
         text-align: center;
-        text-transform: capitalize;
+        /* text-transform: capitalize; */
         font-family: var(--serif-display);
         font-size: var(--44px);
         padding: 3rem 0 0 0;
@@ -133,7 +128,7 @@
         letter-spacing: -0.5rem; 
     }
     :global(#raunchiness h2:after) {
-        content: "Raunchiness";
+        /* content: "Rio"; */
         background: linear-gradient(to bottom, rgba(142, 172, 249, 0) 15%, rgba(142, 172, 249, 1));
         -webkit-text-fill-color: transparent;
         -webkit-background-clip: text;

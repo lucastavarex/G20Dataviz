@@ -3,36 +3,36 @@
     import {select} from "d3-selection";
 
     let showMessage = false;
+    export let text;
 
     function handleBtnClick(e) {
-        const btn = select(this);
-        const textFeedback = select(this.parentNode).select(".message");
-        const readingListIcon = select(".listBtn");
+    const btn = select(this);
+    const textFeedback = select(this.parentNode).select(".message");
+    const readingListIcon = select(".listBtn");
+    
+    let bookID = e.target.parentNode.id;
+    if (bookID == "") { bookID = e.target.parentNode.parentNode.id; }
+    if (bookID.includes("chunk")) { bookID = e.target.parentNode.id; }
+    bookID = bookID.split("_")[1];
 
-        let bookID = e.target.parentNode.id;
-            if (bookID == "") { bookID = e.target.parentNode.parentNode.id; }
-            if (bookID.includes("chunk")) { bookID = e.target.parentNode.id; }
-            bookID = bookID.split("_")[1];
+    if ((this.className).includes("book_inList")) {
+        btn.classed("book_inList", false);
+        btn.classed("book_noList", true); 
+        const indexOfObject = $readingList.findIndex(object => { return object.id == bookID })
+        $readingList.splice(indexOfObject, 1)
+        readingList.set($readingList)
+        // textFeedback.text("Book removed!")
+        showMessage = false;
+    } else {
+        btn.classed("book_inList", true)
+        btn.classed("book_noList", false); 
+        readingList.set([...$readingList, { id: bookID }]);
+        textFeedback.text(text)
+        showMessage = true;
+    }  
+    readingListIcon.classed("highlight", true)
 
-        if ((this.className).includes("book_inList")) {
-            btn.classed("book_inList", false);
-            btn.classed("book_noList", true); 
-            const indexOfObject = $readingList.findIndex(object => { return object.id == bookID })
-            $readingList.splice(indexOfObject, 1)
-            readingList.set($readingList);
-            textFeedback.text("Book removed!")
-            showMessage = true;
-        } else {
-            btn.classed("book_inList", true)
-            btn.classed("book_noList", false); 
-            readingList.set([...$readingList, { id: bookID }]);
-            textFeedback.text("Book added!")
-            showMessage = true;
-        }  
-        readingListIcon.classed("highlight", true)
-
-        setTimeout(() => { showMessage = false; }, 3000);
-    }
+}
 </script>
 
 <button 
@@ -40,7 +40,7 @@
     class="add book_noList"
     aria-label="add or remove book from reading list">
 </button>
-<p class="message" class:visible={showMessage}>Book added!</p>
+<p class="message" class:visible={showMessage}>Book addedd!</p>
 
 <style>
     .add {
@@ -86,7 +86,7 @@
         right: 0;
         font-size: var(--12px);
         font-weight: 900;
-        width: 4.5rem;
+        width: 15rem;
         opacity: 0;
         bottom: 0;
         text-align: center;

@@ -46,11 +46,11 @@
 <nav>
     <div class="top-nav" class:loading={loading}>
         <div class="logo" class:isHidden={$readingListVisible}>
-            <a href="https://pudding.cool" aria-label="The Pudding" target="_self">
+            <a href="https://www.dados.rio/" aria-label="The Pudding" target="_self">
                 {@html logo}
             </a>
         </div>
-        <div class="sect-btns">
+        <!-- <div class="sect-btns">
             {#each sections as section, i}
                 {@const active = $activeSection == section ? "active" : ""}
                 <div class="btn-wrapper"
@@ -64,7 +64,7 @@
                     <p class="label {active}">{resetTitles(section)}</p>
                 </div>
             {/each}
-        </div>
+        </div> -->
         <!-- <button 
             on:click={handleListToggle}
             class="listBtn"
@@ -83,7 +83,7 @@
                 {/if}
         </button> -->
     </div>
-    <div class="slider-wrapper">
+    <!-- <div class="slider-wrapper">
         {#if $sliderVisible}
             <div id="range-slider" 
                 class:isHidden={$readingListVisible}
@@ -102,7 +102,7 @@
                 <p><Icon name="move-right" /></p>
             </div>
         {/if}
-    </div>
+    </div> -->
 </nav>
 
 <style>
@@ -129,6 +129,8 @@
         position: fixed;
         width: 100%;
         height: 3rem;
+        margin-left: 2rem;
+        margin-top: 1rem;
     }
     :global(.book_inList_black) {
         position: absolute;

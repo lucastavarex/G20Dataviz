@@ -11,8 +11,8 @@
 
 <div id="small-multiples">
     <div class="top-wrapper raunchiness">
-        <h5>Raunchiness</h5>
-        <BarChart data={raunchinessData} color={"#4C7DFE"} highlightColor={"#4C7DFE"} pos={"inline"} yearTotals={yearTotals}/>
+        <h5>Rio de Janeiro</h5>
+        <BarChart data={raunchinessData} color={"red"} highlightColor={"red"} pos={"inline"} yearTotals={yearTotals}/>
         <div class="year-labels">
             <p>2011</p>
             <p>2023</p>

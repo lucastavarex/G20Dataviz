@@ -3,8 +3,6 @@
     import { select } from "d3-selection";
     import { activeSection, maxWidthRaunch, maxWidthIllo, maxWidthRace, sliderVisible, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace, xShiftRaunch, xShiftIllo, xShiftRace } from "$stores/misc.js";
     import Book from "$components/Wall.Book.svelte";
-    import Shelf from "$components/Wall.Shelf.svelte";
-    // import { lazy, lazyAll } from "$utils/lazyLoad.js";
 
     export let data;
     export let value;
@@ -17,7 +15,7 @@
 
     let bookWidth;
     let bookRows = 4;
-    let shelves = [0, 1, 2];
+    let shelves = [0];
     let h;
     let w;
     let wallH;
@@ -35,45 +33,27 @@
     }
 
     function shiftX(value) {
+       
         if (copy[value] !== undefined) {
             if (value == 0) { 
                 if ($activeSection == "raunchiness") { 
                     sliderStoreRaunch.set(0);
                     xShiftRaunch.set(0);  
-                } else if ($activeSection == "illustration") { 
-                    sliderStoreIllo.set(0);
-                    xShiftIllo.set(0); 
-                } else if ($activeSection == "race") { 
-                    sliderStoreRace.set(0);
-                    xShiftRace.set(0);  
                 }
             }
             else if (copy[value] !== 0 && select(`#${section} #book_${copy[value].scrollToId}`).node() !== null) {
-                const sel = select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
-                if ($activeSection == "raunchiness") { 
-                    const val = $xShiftRaunch + sel - margins;
-                    slideSpeed = Math.max(Math.abs(sel)/750, 1.5);
-                    xShiftRaunch.set(val);  
-                } else if ($activeSection == "illustration") { 
-                    const val = $xShiftIllo + sel - margins;
-                    slideSpeed = Math.max(Math.abs(sel)/750, 1.5);
-                    xShiftIllo.set(val); 
-                } else if ($activeSection == "race") { 
-                    const val = $xShiftRace + sel - margins;
-                    slideSpeed = Math.max(Math.abs(sel)/750, 1.5);
-                    xShiftRace.set(val);  
-                }
-            }
+        const sel = select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
+        if ($activeSection == "raunchiness") {
+            const padding = 330; 
+            const val = $xShiftRaunch + sel - margins - padding; 
+            slideSpeed = Math.max(Math.abs(sel)/750, 1.5);
+            xShiftRaunch.set(val);  
+        }
+    }
             if (value == copy.length - 1 && select(`#${$activeSection} .overflow-wrap`).node() !== null) { 
                 if ($activeSection == "raunchiness") { 
                     const val = $xShiftRaunch
                     maxWidthRaunch.set(val); 
-                } else if ($activeSection == "illustration") { 
-                    const val = $xShiftIllo
-                    maxWidthIllo.set(val);
-                } else if ($activeSection == "race") { 
-                    const val = $xShiftRace
-                    maxWidthRace.set(val);
                 }
             }
         }
@@ -110,21 +90,15 @@
             if ($activeSection == "raunchiness") {
                 const val = $sliderStoreRaunch*$maxWidthRaunch/100;
                 xShiftRaunch.set(val)
-            } else if ($activeSection == "illustration") {
-                const val = $sliderStoreIllo*$maxWidthIllo/100;
-                xShiftIllo.set(val)
-            } if ($activeSection == "race") {
-                const val = $sliderStoreRace*$maxWidthRace/100;
-                xShiftRace.set(val)
-            }
+            } 
         }
     }
 
     function getBookRows(wallH) {
-        if (wallH !== undefined) {
-            bookRows = wallH > 550 ? 5 : 4;
-            shelves = wallH > 550 ? [0, 1, 2, 3, 4] : [0, 1, 2, 3];
-        }
+        // if (wallH !== undefined) {
+        //     bookRows = wallH > 550 ? 5 : 4;
+        //     shelves = wallH > 550 ? [0, 1, 2, 3, 4] : [0, 1, 2, 3];
+        // }
     }
 
     function loadImgs($activeSection, section) {
@@ -140,51 +114,53 @@
     $: $sliderStoreIllo, shiftSlider();
     $: $sliderStoreRace, shiftSlider();
     $: $activeSection, loadImgs($activeSection, section);
+
+    
+  const excludedYears = ["1929","1930","1931","1932","1933","1934","1935","1936","1937","1938","1939","1940","1929.1", "1929.2", "1930.1", "1930.2","1931.1", 
+  "1931.2","1932.1", "1932.2","1933.1", "1933.2","1934.1", 
+  "1934.2","1935.1", "1935.2","1936.1", "1936.2","1937.1", 
+  "1937.2","1938.1", "1938.2","1939.1", "1939.2","1940.1", "1940.2" ];
+
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
 
 
 <section id="wall-{section}" class="wall">
+
         <div class="overflow-wrap" style="transform:translate3d(-{xShiftSection}px,0,0); transition: {slideSpeed}s ease-in-out;">
             {#each yearGroups as year, i}
+            {#if !excludedYears.includes(year[0])}
                 <div class="year-wrapper" bind:clientHeight={wallH}>
-                    {#if wallH !== undefined && chunkWidths.length == 13}
-                        {@const match = chunkWidths.find((d) => d.year == year[0])}
+                    {#if wallH !== undefined}
                         <div class="yearChunk" id="chunk-{year[0]}"
-                        style="width:{match.chunkWidth}px">
+                        style="width:23rem">
                             <div class="books">
                                 {#each year[1] as book, i}
                                     <Book book={book} index={i} wallH={wallH} bookRows={bookRows} imgsLoaded={imgsLoaded} />
-                                {/each}
+                                    {/each}
                             </div>
-                        </div>
-                        <div class="shelves">
-                            {#each shelves as shelf, i} 
-                                <Shelf shelfW={match.chunkWidth} wallH={wallH} bookRows={bookRows} />
-                            {/each}
                         </div>
                     {/if}
                 </div>
+                {/if}
             {/each}
         </div>
 </section>
 
 <style>
-    /* :global(.blur) {
-        filter: blur(1px);
-        transition: 1s ease-in-out;
-    } */
+   
     .overflow-wrap {
         display: flex;
         flex-direction: row;
-        padding: 0 5rem;
+        /* padding: 0 5rem; */
         transition: 1.5s ease-in-out;
     }
+
     .wall {
         margin: 0;
         padding: 0;
-        display: flex;
+        /* display: flex; */
         flex-direction: row;
         height: 100vh;
         z-index: 1;
@@ -193,28 +169,27 @@
         overflow-x: hidden;
         width: 100%;
     }
-    .year-wrapper {
-        height: 62vh;
-        pointer-events: none;
-    }
+   
     .yearChunk {
-        margin: 0 5rem 0 0;
+        /* margin: 0 1rem 0 0; */
     }
-    .shelves {
-        width: 100%;
-        height: 70vh;
-        position: absolute;
-        z-index: 1;
+
+    .year-wrapper {
+        padding-right: 2rem;
+        /* padding-left: 5rem; */
         pointer-events: none;
     }
+   
     .books {
-        height: 72vh;
-        position: absolute;
-        z-index: 999;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        transform:translate3d(0,0,0);
-        -webkit-transform:translate3d(0,0,0);
-    }
+   height: auto;
+   position: relative;
+   z-index: 999;
+   
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   transform: translate3d(0,0,0);
+   -webkit-transform: translate3d(0,0,0);
+}
+
 </style>

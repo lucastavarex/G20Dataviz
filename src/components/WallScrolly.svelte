@@ -4,7 +4,7 @@
 	import { stepData, sliderVisible } from "$stores/misc.js";
 	
 	export let data;
-    export let copy;
+  export let copy;
 	export let section;
 	export let xShiftSection;
 
@@ -25,6 +25,7 @@
 </script>
 
 <section id="scrolly">
+	<div class="spacer" />
 	<div class="sticky">
         <Wall data={data} value={value} section={section} copy={copy} xShiftSection={xShiftSection}/>
     </div>
@@ -33,25 +34,35 @@
             {#each copy as text, i}
                 <div class="step">
                     <p>{@html text.text}</p>
+										{#if text.credits}
+										<!-- <p class="credits">{@html text.credits}</p> -->
+										{/if}
+                   
                 </div>
             {/each}
         {/if}
 	</Scrolly>
-	<div class="spacer" />
+	<!-- <div class="spacer" /> -->
 </section>
 
 <style>
-	.sticky {
-		position: sticky;
-		top: 6rem;
-		transition: all 1s;
-		height: 100vh;
-        z-index: 1;
-        overflow-x: hidden;
-		pointer-events: none;
+	.credits{
+		font-size: 11px;
 	}
+.sticky {
+    position: sticky;
+    top: 6rem;
+    transition: all 1s;
+   
+    z-index: 1;
+    overflow-x: hidden;
+    pointer-events: none;
+    max-width: 1200px; /* Set maximum width */
+    margin: 0 auto; /* Center align the element */
+}
+
 	.spacer {
-		height: 75vh;
+		height: 10vh;
 	}
 	.step {
 		height: 80vh;
@@ -66,11 +77,11 @@
 		text-align: center;
 		font-family: var(--sans-display);
 		font-weight: 900;
-		font-size: var(--12px);
+		font-size: 15px !important;
 		display: flex;
 		justify-content: center;
 	}
-	.step:last-of-type p::before {
+	/* .step:last-of-type p::before {
 		content: " ";
 		position:relative;
 		width: 1rem;
@@ -82,7 +93,7 @@
 		background-size: 1rem 1rem;
         background-repeat: no-repeat;
         background-position: center;
-	}
+	} */
 	.step p {
 		font-family: var(--serif);
 		font-weight: 500;

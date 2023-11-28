@@ -85,9 +85,9 @@
 					<div class="book-cover">
 						<div class="img-wrapper">
 							<img 
-								srcset="assets/images/rj_cover.png 600w, assets/images/rj_cover.png 900w" 
+								srcset="assets/images/rj_cover.jpg 600w, assets/images/rj_cover.jpg 900w" 
 								sizes="(max-width: 600px) 600px, 900px"
-								src="assets/images/rj_cover.png"
+								src="assets/images/rj_cover.jpg"
 								alt="An illustrated book cover of an Asian American woman with long brown hair and red lipstick. She has one hand on her hip and the other on her chin in a curious pose. There are colorful books flying around her on a blue background."
 							/>
 						</div>
@@ -95,7 +95,7 @@
 						<div class="title-wrapper" style={"width: 100%; height: 120%;"}>
 							<h1>Rio <br> de <br> Janeiro <br></h1>
 						</div> -->
-						<p class="byline"><a href="https://pudding.cool/author/alice-liang">Por: Judite Cypreste</a></p>
+						<!-- <p class="byline"><a href="https://pudding.cool/author/alice-liang">Por: Judite Cypreste</a></p> -->
 					</div>
 					<div class="book-cover-back">
 						<div class="book-cover-back-indent">
@@ -131,7 +131,7 @@
 				<div class="book-bottom"></div>
 			</div>
 		</div>
-	<p class="credit"> • Design <a href="http://www.sandrachiu.com/">Caio Jacintho</a></p>
+	<!-- <p class="credit"> Desenvolvido por <br> Equipe de Visualização de Dados da cidade do Rio de Janeiro</p> -->
 </section>
 
 <style>
@@ -308,7 +308,7 @@
 		width: 100%;
         height: 100%;
 		position:absolute; top:0; bottom:0;
-		background:#007E7D;
+		background:#000000;
 		transform-style:preserve-3d;
 		backface-visibility:hidden;
 		transform:rotate3d(0,1,0,-180deg);
@@ -379,7 +379,7 @@
     .book-back{
 		width:100%;
 		height: calc(100% - 1rem);
-		background:#007E7D;
+		background:#000000;
 		position:absolute; 
         top:0; 
         bottom:0;
@@ -392,8 +392,8 @@
 -------------------------------------------------------------- */
 	.book-bone{
 		width:50px;
-		background:#007E7D;
-		box-shadow:1px 0 0 #007E7D,-1px 0 0 #007E7D; /* 旋转的时候 拼接处隐隐约约会有个缝隙 所以加上个阴影来填补它 */
+		background:#000000;
+		box-shadow:1px 0 0 #000000,-1px 0 0 #000000; /* 旋转的时候 拼接处隐隐约约会有个缝隙 所以加上个阴影来填补它 */
 		position:absolute;
 		top:0; bottom:16px; left:-25px;
 		transform:rotate3d(0,1,0,-90deg);

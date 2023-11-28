@@ -11,7 +11,8 @@
 		"format": "prettier --write --plugin-search-dir=. .",
 		"imgDownload": "node tasks/imgDownload.js",
 		"imgLookbackDownload": "node tasks/imgLookbackDownload.js",
-		"checkURL": "node tasks/checkURL.js"
+		"checkURL": "node tasks/checkURL.js",
+		"host": "vite --host"
 	},
 	"devDependencies": {
 		"@rollup/plugin-dsv": "^3.0.2",

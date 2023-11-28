@@ -100,7 +100,7 @@
         <div class="paper" class:isScroll={isScroll}
             in:fly={{ y: 200, duration: 1000}}
             out:fly={{ y: 200, duration: 1000}}>
-            <h3>Your Reading List</h3>
+            <!-- <h3>Your Reading List</h3> -->
             {#if $readingList.length > 0}
                 <div class="list-btn-wrapper">
                     <button class="download-list" on:click={downloadList}>Download list as csv<Icon name="download" /></button>
@@ -150,7 +150,7 @@
     {/if}
 </section>
 {:else if pos == "inline"}
-<section id="reading-list-inline">
+<!-- <section id="reading-list-inline">
     <div class="paper" class:isScroll={isScroll}
         in:fly={{ y: 2000, duration: 1000 }}
         out:fly={{ y: 2000, duration: 1000 }}>
@@ -199,7 +199,7 @@
             <Bookmark />
         {/if}
     </div>
-</section>
+</section> -->
 {/if}
 
 <style>

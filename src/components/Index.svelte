@@ -1,8 +1,8 @@
 <script>
 	import { getContext, onMount } from "svelte";
-	import { activeSection, readingListVisible, xShiftRaunch, xShiftIllo, xShiftRace } from "$stores/misc.js";
+	import { activeSection,activeBar, readingListVisible, xShiftRaunch, xShiftIllo, xShiftRace } from "$stores/misc.js";
 	import { fly } from 'svelte/transition';
-	import data from "$data/listings.csv";
+	import data from "$data/listings_copia2.csv";
     import { groups, ascending } from "d3-array";
 	import { select } from "d3-selection";
 	import ChapterMarker from "$components/ChapterMarker.svelte";
@@ -20,9 +20,7 @@
 	let w;
 	let h;
 	let body;
-	let raunchinessData = data.filter(d => d.cover_url.includes("http")).filter(d => d["Man partially unclothed"] == "TRUE" || d["Woman partially unclothed"] == "TRUE").sort((a, b) => ascending(a["Year Season"], b["Year Season"]));
-	let illustrationData = data.filter(d => d.cover_url.includes("http")).filter(d => d.Style == "Illustrated").sort((a, b) => ascending(a["Year Season"], b["Year Season"]));
-	let raceData = data.filter(d => d.cover_url.includes("http")).filter(d => d["Has POC"] == "TRUE").sort((a, b) => ascending(a["Year Season"], b["Year Season"]));
+	let raunchinessData = data.sort((a, b) => ascending(a["year"], b["year"]));
 	let yearTotals = groups(data, d => d.year);
 	let barData = raunchinessData;
 	let barColorHighlight = "#4C7DFE";
@@ -31,6 +29,7 @@
 	onMount(() => {
 		body = select("body")
 		setScroll($readingListVisible)
+		console.log("raunc ", raunchinessData)
 	})
 
 	function setScroll(readingListVisible) {
@@ -43,8 +42,8 @@
 	function swapBarData(activeSection) {
 		if (activeSection == "raunchiness") {
 			barData = raunchinessData;
-			barColor = "#8eacf9";
-			barColorHighlight = "#4C7DFE";
+			barColor = null;
+			barColorHighlight = "#a9a9a9";
 		} else if (activeSection == "illustration") {
 			barData = illustrationData;
 			barColor = "#fde59a";
@@ -71,29 +70,34 @@
 <svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY={scrollY} />
 <ChapterMarker />
 <IntroScrolly bookMin={bookMin} w={w} h={h} scrollY={scrollY}/>
-<Lookback bookMin={bookMin}/>
+
 <div class="sections">
 	<Chapter id={"raunchiness"} data={raunchinessData} copyBlock={copy.raunchinessText} copyScroll={copy.raunchinessScroll} scrollY={scrollY} xShiftSection={$xShiftRaunch} />
-	<Chapter id={"illustration"} data={illustrationData} copyBlock={copy.illustrationText} copyScroll={copy.illustrationScroll} scrollY={scrollY} xShiftSection={$xShiftIllo} />
-	<Chapter id={"race"} data={raceData} copyBlock={copy.raceText} copyScroll={copy.raceScroll} scrollY={scrollY} xShiftSection={$xShiftRace} />
+<!-- {console.log("OLHA AQUI: " , raunchinessData)} -->
 </div>
-{#if $activeSection !== "intro" && $activeSection !== "methods" && $activeSection !== null}
+
+{#if $activeSection !== "intro" && $activeSection !== "methods" && $activeSection !== null }
 	<section id="barChart" in:fly={{ y: 200, duration: 2000 }} out:fly={{ y: 200, duration: 2000 }}>
 		<BarChart data={barData} color={barColor} highlightColor={barColorHighlight} pos={"overlay"} yearTotals={yearTotals}/>
 		<div class="shield"></div>
 	</section>
 {/if}
-<ReadingList data={data} pos={"overlay"}/>
-<Outro />
+
+<!-- <Outro /> -->
+
 <Footer />
 
 <style>
+
+	.sections {
+		
+	}
 	#barChart {
         position: fixed;
         width: 100%;
-        height: 10rem;
+        /* height: 10rem; */
         left: 0;
-        bottom: 2rem;
+        bottom: 1rem !important;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -101,8 +105,6 @@
 		pointer-events: none;
     }
 	.shield {
-		width: 100%;
-		height: 2rem;
 		position: absolute;
 		left: 0;
 		bottom: -2rem ;

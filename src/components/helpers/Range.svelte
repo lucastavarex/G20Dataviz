@@ -30,6 +30,7 @@
 
 	function handleChange() {
 		promptVisible = 0;
+		console.log(value, $activeSection);
 		if ($activeSection == "raunchiness") { sliderStoreRaunch.set(value) }
 		else if ($activeSection == "illustration") { 
 			sliderStoreIllo.set(value) }
@@ -48,9 +49,9 @@
 	</div>
 	<input on:change={handleChange} type="range" aria-label={label} {min} {max} {step} bind:value />
 		<div class="prompt" style="opacity: {promptVisible};"
-			in:fly={{ y: 10, duration: 1000, delay: 250}}
+			in:fly={{ y: 100, duration: 1000, delay: 250}}
 			out:fade={{ duration: 200 }}>
-			<p>Drag me!</p>
+			<p>Me arraste!</p>
 		</div>
 
 </div>

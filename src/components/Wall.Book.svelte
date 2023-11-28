@@ -1,14 +1,11 @@
 <script>
-    import AddButton from "$components/AddButton.svelte";
     import { stepData } from "$stores/misc.js";
-    import { Image } from "svelte-lazy-loader";
+    import AddButton from "$components/AddButton.svelte";
 
     export let book;
     export let index;
-    export let bookAddable = true;
-    export let wallH;
-    export let bookRows;
     export let imgsLoaded;
+    export let bookAddable = true;
 
     let w;
     let h; 
@@ -16,44 +13,50 @@
     function checkData(data, id) {
         if (data[1] !== undefined) { return data[1].highlightBooks.includes(id); }
     }
+
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
 
 {#if index == 0}
-    <div class={checkData($stepData, book.ISBN) ? "book active" : "book"}
-        id="book_{book.ISBN}"
-        style="height: {Math.floor(wallH/bookRows)}px; width: {Math.floor(wallH/bookRows*0.66)}px"
-    >   
-        <div class='img-wrapper' style="height: {Math.floor(wallH/bookRows-48)}px; width: {Math.floor((wallH/bookRows-48)*0.625)}px;">
+    <div class={checkData($stepData, book.id) ? "book active" : "book"}
+        id="book_{book.id}"
+        >   
+        <!-- style="height: {Math.floor(wallH/bookRows)}px; width: {Math.floor(wallH/bookRows*0.66)}px" -->
+        <div class='img-wrapper' >
             <div class="overlay"></div>
-            {#if imgsLoaded}
-                <img src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
+            {#if imgsLoaded }
+                <img src="https://raw.githubusercontent.com/lucastavarex/G20Dataviz/main/static/assets/images/covers2/{book.id}.jpg" alt="{book.title}" />
             {/if}
-            <!-- <Image loading="lazy" src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
         </div>
-        <div class="marker">{book.year}</div>
+        <!-- <div class="marker">{book.year}</div> -->
         {#if bookAddable == true}
-            <!-- <AddButton /> -->
-        {/if}
+        
+        <AddButton text={book.credits}/>
+
+        
+    {/if}
+       
     </div>
 {:else}
-    <div class={checkData($stepData, book.ISBN) ? "book active" : "book"} 
-        id="book_{book.ISBN}" 
-        style="height: {Math.floor(wallH/bookRows)}px; width: {Math.floor(wallH/bookRows*0.66)}px"
+    <div class={checkData($stepData, book.id) ? "book active" : "book"} 
+        id="book_{book.id}" 
+       
     >
-        <div class='img-wrapper' style="height: {Math.floor(wallH/bookRows-48)}px; width: {Math.floor((wallH/bookRows-48)*0.625)}px;">
+        <div class='img-wrapper' >
             <div class="overlay"></div>
-            <img src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
-            <!-- <Image loading="lazy" src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
+            <img src="https://raw.githubusercontent.com/lucastavarex/G20Dataviz/main/static/assets/images/covers2/{book.id}.jpg" alt="{book.title}" />            
         </div>
         {#if bookAddable == true}
-            <!-- <AddButton /> -->
-        {/if}
+        <AddButton />
+    {/if}
     </div>
 {/if}
 
 <style>
+
+    
+ 
     .book {
         margin: 0;
         display: flex;
@@ -67,42 +70,18 @@
     }
     .img-wrapper {
         background-size: cover;
-        background-repeat: no-repeat;
-        box-shadow: -3px 3px 2px -2px  rgba(0, 0, 0, 0.125), inset -1px 1px 2px rgba(255, 255, 255, 0.5);
-        transform: translate(0,0,0) perspective(8rem) rotateX(2deg);
-        transform-style: preserve-3d;
+        /* background-repeat: no-repeat; */
+        /* box-shadow: -3px 3px 2px -2px  rgba(0, 0, 0, 0.125), inset -1px 1px 2px rgba(255, 255, 255, 0.5); */
+        /* transform: translate(0,0,0) perspective(8rem) rotateX(2deg); */
+        /* transform-style: preserve-3d; */
     }
-    :global(.img-wrapper img) {
+    /* :global(.img-wrapper img) {
         object-fit: cover;
         width: 100%;
         height: 100%;
-    }
-    :global(#raunchiness .book.active .img-wrapper)  {
-        opacity: 1;
-        filter: contrast(100%) brightness(100%) saturate(100%);
-        transform: scale(1.125);
-        transition: all 0.25s ease-in 0.5s;
-    }
-    :global(#illustration .book.active .img-wrapper)  {
-        opacity: 1;
-        filter: contrast(100%) brightness(100%) saturate(100%);
-        transform: scale(1.125);
-        transition: all 0.25s ease-in 0.5s;
-    }
-    :global(#race .book.active .img-wrapper)  {
-        opacity: 1;
-        filter: contrast(100%) brightness(100%) saturate(100%);
-        transform: scale(1.125);
-        transition: all 0.25s ease-in 0.5s;
-    }
-    .book .img-wrapper {
-        opacity: 1;
-        filter: contrast(100%) brightness(100%) saturate(100%);
-        transition: all 0.25s ease-in;
-        transform: scale(1);
-        pointer-events: all;
-    }
-    .img-wrapper .overlay {
+    } */
+   
+    /* .img-wrapper .overlay {
         width: 100%;
         height: 100%;
         position: absolute;
@@ -115,12 +94,12 @@
             transparent 16px, 
             rgba(255, 255, 255, 0.25) 17px,
             transparent 22px)
-    }
+    } */
     .book.active .img-wrapper {
-        outline: 3px solid var(--romance-pink);
-        box-shadow: 0 0 8px 5px var(--romance-pink);
-    }
-    /* :global(.book.active .img-wrapper) {
+        outline: 3px solid var(--romance-bg-blue);
+        box-shadow: 0 0 8px 5px var(--romance-bg-blue);
+    } 
+   :global(.book.active .img-wrapper) {
         outline: 3px solid var(--romance-yellow);
         box-shadow: 0 0 30px 5px var(--romance-yellow);
     }
@@ -131,7 +110,7 @@
     :global(#race .book.active .img-wrapper) {
         outline: 3px solid var(--romance-yellow);
         box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.25);
-    } */
+    } 
     .book .marker {
         position: absolute;
         padding: 0.25rem 0.5rem;
@@ -142,7 +121,7 @@
         font-family: var(--sans-display);
         font-size: var(--14px);
         z-index: 1;
-        transform: translate(-50%, 0);
+        /* transform: translate(-50%, 0); */
     }
     :global(#lookback .book .marker) {
         background: var(--romance-pink-light);

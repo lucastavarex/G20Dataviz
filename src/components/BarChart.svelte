@@ -12,6 +12,7 @@
     let w;
     let barChartW;
 
+    
     function checkData(data, year) {
         if (pos == "inline") { return false } 
         else if (pos !== "overlay") { return true } 
@@ -29,42 +30,57 @@
     }
 
     $: groupedData = groups(data, d => d.year);
+    $: filteredGroupedData = groupedData.filter(([year, _]) => 
+    ["1906", "1908","1922", 
+    "1928","1929", "1930", "1930","1931","1932","1933","1934","1935","1936","1937","1938","1939","1940",
+    "1942","1947","1950","1955",
+    "1967","1992","1999",
+    "2007", "2012","2013",
+    "2014","2016","2019",
+    "2023", "2024" ].includes(year));
+    $: numItems = filteredGroupedData.length;
+    $: styleVar = `--num-items: ${numItems};`;
 </script>
 
 <svelte:window bind:innerWidth={w} />
 
     {#if pos == "overlay"}
-        <p class="label left" style="color: {data[0]}">2011</p>
+        <p class="label left" style="color: {data[0]}">1906</p>
     {/if}
-    <div class="chart-wrapper chart-wrapper-{pos}" bind:clientWidth={barChartW}>
+ 
+    <div class="chart-wrapper chart-wrapper-{pos}" bind:clientWidth={barChartW} style={styleVar}>
         {#if groupedData !== undefined}
-            {#each groupedData as year, i}
-                <div class={checkData($stepData, year[0]) ? "year-bar active" : "year-bar"} 
-                id="bar-{year[0]}"
-                style="height: {calcPercentage(year[0], year[1].length)*1.125}px;
-                width: {barChartW/groupedData.length}px;
-                background: {checkData($stepData, year[0]) ? highlightColor : color}"
-                >
+        {#each filteredGroupedData as year, i}
+        <div class={checkData($stepData, year[0]) ? "year-ball active" : "year-ball"}
+            id="bar-{year[0]}"
+            style="background-color: {checkData($stepData, year[0]) ? highlightColor : color};">
                     {#if pos == "overlay"}
                         <p class="count"
-                        in:fly={{ y: 20, duration: 500 }} out:fade>
-                            {calcPercentage(year[0], year[1].length, i)}%
+                            in:fly={{ y: 20, duration: 500 }} out:fade>
+                            {year[0]}
                         </p>
                     {/if}
-                    {#if pos == "inline" && i == 12 || pos == "inline" && i == 0}
-                        <p class="count" style="opacity: 1">
-                            {calcPercentage(year[0], year[1].length, i)}%
-                        </p>
-                    {/if}
+                    <span class="horizontal-line"></span>
                 </div>
             {/each}
         {/if}
     </div>
+    
     {#if pos == "overlay"}
-        <p class="label right" style="color: {data[0]}">2023</p>
+        <p class="label right" style="color: {data[0]}">2024</p>
     {/if}
 
 <style>
+    .horizontal-line {
+    position: absolute;
+    height: 1px; /* or the thickness you desire */
+    width: 100%; /* this ensures it spans the entire width of the ball */
+    background-color: #a9a9a9; /* or any color you prefer */
+    top: 50%; /* centers the line vertically */
+    left: 0;
+    transform: translateY(-50%); /* ensures perfect centering */
+}
+
     .chart-wrapper {
         display: flex;
         flex-direction: row; 
@@ -76,14 +92,17 @@
         position: relative;
         border-bottom: 1px solid var(--color-gray-800);
     }
-    .chart-wrapper-inline {
-        height: 9rem;
-    }
-    .year-bar {
-        width: 5rem;
-        margin: 0 0.05rem;
-        transition: 0.25s linear;
+   
+    .year-ball {
+        width: calc(50% ); /* Adjust based on the number of items, subtracting margin */
+        height: 0; /* Initial height to 0 */
+        padding-top: calc(100% / var(--num-items) - 0.1rem);
+        /* margin: 0 0.01rem; */
+        border-radius: 50%; /* Circular shape */
+        box-sizing: border-box; /* Include padding in width calculation */
         position: relative;
+        transition: 0.25s linear;
+
     }
     .count {
         margin: 0;
@@ -94,7 +113,7 @@
         top: -1rem;
         left: 50%;
         transition: 0.25s linear;
-        opacity: 0.125;
+        opacity: 0;
         letter-spacing: -0.05rem;
         font-family: var(--sans-display);
         font-size: var(--12px);
@@ -102,7 +121,7 @@
         z-index: 1000;
         transform: translate(-50%, 0);
     }
-    .year-bar.active .count {
+    .year-ball.active .count {
         opacity: 1;
     }
     .label {

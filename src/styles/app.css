@@ -2,15 +2,17 @@
 @import "normalize.css";
 @import "font.css";
 @import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
 
 /* colors defined in variables.css */
 :root {
 	/* font */
-	--sans: "National 2 Web", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
-	--serif: "Tiempos Text Web", Iowan Old Style, Times New Roman, Times, serif;
-	--mono: Menlo, Consolas, Monaco, monospace;
-	--sans-display: filson-pro, "National 2 Web", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
-	--serif-display: "Canela", "Tiempos Text Web", Iowan Old Style, Times New Roman, Times, serif;
+	--font-family: Outfit, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	--sans: Outfit, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	--serif: Outfit, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	--mono: Outfit, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	--sans-display: Outfit, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	--serif-display: Outfit, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
 	/* z-index */
 	--z-bottom: -100;
