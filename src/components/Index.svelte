@@ -63,7 +63,7 @@
 	}
 	
 	$: activeSection, swapBarData($activeSection)
-	$: readingListVisible, setScroll($readingListVisible)
+	$: barChartClass = $activeSection !== "raunchiness" ? "hidden" : "";	$: readingListVisible, setScroll($readingListVisible)
 	$: bookMin = calcMinDim(w, h);
 </script>
 
@@ -76,8 +76,8 @@
 <!-- {console.log("OLHA AQUI: " , raunchinessData)} -->
 </div>
 
-{#if $activeSection !== "intro" && $activeSection !== "methods" && $activeSection !== null }
-	<section id="barChart" in:fly={{ y: 200, duration: 2000 }} out:fly={{ y: 200, duration: 2000 }}>
+{#if $activeSection == "raunchiness" && $activeSection !== null }
+	<section id="barChart" in:fly={{ y: 200, duration: 2000 }} out:fly={{ y: 200, duration: 2000 }} class={barChartClass}>
 		<BarChart data={barData} color={barColor} highlightColor={barColorHighlight} pos={"overlay"} yearTotals={yearTotals}/>
 		<div class="shield"></div>
 	</section>
@@ -89,9 +89,10 @@
 
 <style>
 
-	.sections {
-		
+.hidden {
+		visibility: hidden !important;
 	}
+
 	#barChart {
         position: fixed;
         width: 100%;

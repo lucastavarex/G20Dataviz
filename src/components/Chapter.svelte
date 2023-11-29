@@ -12,7 +12,7 @@
 
     export let id;
     export let data;
-    export let copyBlock;
+    // export let copyBlock;
     export let copyScroll;
     export let scrollY;
     export let xShiftSection;

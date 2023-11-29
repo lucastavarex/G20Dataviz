@@ -1,17 +1,13 @@
 <!-- src/components/Footer.svelte -->
 
 <script>
-	import logo from "../svg/logo_prefeitura.png";
+	import logo from "$svg/logo_prefeitura.png";
 	import inView from "$actions/inView.js";
 	import { activeBar } from "$stores/misc.js";
-	function setActiveBar(id) { activeBar.set(id); }
+
+
 </script>
 
-<section id="false"
-    use:inView
-    on:enter={() => setActiveBar(false)}>
-   
-</section>
 
  <footer class="footer">
 	<h3>Autores</h3>

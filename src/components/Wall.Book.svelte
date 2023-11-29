@@ -25,38 +25,21 @@
         <!-- style="height: {Math.floor(wallH/bookRows)}px; width: {Math.floor(wallH/bookRows*0.66)}px" -->
         <div class='img-wrapper' >
             <div class="overlay"></div>
-            {#if imgsLoaded }
+            {#if imgsLoaded && book.id != "20241" && book.id != "194721"}
                 <img src="https://raw.githubusercontent.com/lucastavarex/G20Dataviz/main/static/assets/images/covers2/{book.id}.jpg" alt="{book.title}" />
             {/if}
         </div>
         <!-- <div class="marker">{book.year}</div> -->
-        {#if bookAddable == true}
-        
-        <AddButton text={book.credits}/>
+        {#if bookAddable == true && book.id != "20241" && book.id != "194721"}
+            <AddButton text={book.credits}/>
+        {/if}
+       
+    </div>
 
-        
-    {/if}
-       
-    </div>
-{:else}
-    <div class={checkData($stepData, book.id) ? "book active" : "book"} 
-        id="book_{book.id}" 
-       
-    >
-        <div class='img-wrapper' >
-            <div class="overlay"></div>
-            <img src="https://raw.githubusercontent.com/lucastavarex/G20Dataviz/main/static/assets/images/covers2/{book.id}.jpg" alt="{book.title}" />            
-        </div>
-        {#if bookAddable == true}
-        <AddButton />
-    {/if}
-    </div>
 {/if}
 
 <style>
 
-    
- 
     .book {
         margin: 0;
         display: flex;
@@ -69,7 +52,7 @@
         justify-content: center;
     }
     .img-wrapper {
-        background-size: cover;
+        width:24rem !important;
         /* background-repeat: no-repeat; */
         /* box-shadow: -3px 3px 2px -2px  rgba(0, 0, 0, 0.125), inset -1px 1px 2px rgba(255, 255, 255, 0.5); */
         /* transform: translate(0,0,0) perspective(8rem) rotateX(2deg); */

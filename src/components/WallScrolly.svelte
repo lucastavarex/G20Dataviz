@@ -33,11 +33,10 @@
         {#if copy}
             {#each copy as text, i}
                 <div class="step">
+									{#if text.text}
                     <p>{@html text.text}</p>
-										{#if text.credits}
-										<!-- <p class="credits">{@html text.credits}</p> -->
-										{/if}
-                   
+									{/if}
+
                 </div>
             {/each}
         {/if}

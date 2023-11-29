@@ -155,6 +155,7 @@
         opacity: 1;
         display: inline;
     }
+
     @media only screen and (min-width: 600px) {
         .count {
             font-size: var(--12px);
@@ -184,11 +185,26 @@
         :global(#barChart .label .icon) {
             display: none;
         }
+       
 	}
     @media only screen and (min-width: 800px) {
         .count {
             font-size: var(--14px);
             top: -1.25rem;
         }
+	}
+    @media only screen and (max-width: 500px) {
+        .label.right  {
+            top: 0.1rem;
+        }
+        .label.left  {
+            top: 0.1rem;
+        }
+        .chart-wrapper {
+            border-bottom: 0px
+        
+    }
+   
+        
 	}
 </style>
